@@ -5,7 +5,7 @@ function LoginBtn() {
     return (
         <div className="loginbtn">
             <Link to="/login">
-                <button>Login</button>
+                <button className="btn">Login</button>
             </Link>
         </div>
     )

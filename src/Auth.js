@@ -62,7 +62,7 @@ class LoginPage extends Component {
     
     return (
       <div className="Login">
-        {sessionStorage.getItem("login")==="true" ? (
+        {/* {sessionStorage.getItem("login")==="true" ? (
             <div> <div>{sessionStorage.getItem("username")}</div>  
             <button className="signout" onClick={this.changeLoginStatus}>Sign Out</button>
             </div>
@@ -93,7 +93,7 @@ class LoginPage extends Component {
 
             <input type="submit" value="Log In" data-test="submit" />
           </form>
-        )}
+        )} */}
       </div>
     );
   }

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import OpenSearchBtn from './OpenSearchBtn';
 import BookList from './BookList';
-import LoginPage from './Auth';
 import LoginBtn from './Loginbtn';
 
 
@@ -18,10 +17,19 @@ class MainPage extends React.Component {
         return (
             <div className="list-books">
                 <div className="list-books-title">
-                    <h1>[ Bookshelf ]</h1>
+                <div class="foo">
+                    <span class="letter" data-letter="B">B</span>
+                    <span class="letter" data-letter="O">O</span>
+                    <span class="letter" data-letter="O">O</span>
+                    <span class="letter" data-letter="K">K</span>
+                    <span class="letter" data-letter="S">S</span>
+                    <span class="letter" data-letter="H">H</span>
+                    <span class="letter" data-letter="E">E</span>
+                    <span class="letter" data-letter="L">L</span>
+                    <span class="letter" data-letter="F">F</span>
+                </div>
                 </div>
                 <div className="login"><LoginBtn /></div>
-                <div className="login"><LoginPage /></div>
                 <div>
                     <div className="list-books-content">
                         <div>
