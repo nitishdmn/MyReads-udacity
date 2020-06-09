@@ -131,6 +131,7 @@ button:hover {
 }
 .btn:hover{
   background: transparent;
+  color: #000;
 }
 #btn:hover circle {
   height: 50px;

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
+
+
 
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -23,20 +25,22 @@ const formValid = ({ formErrors, ...rest }) => {
 };
 
 class App extends Component {
+  
   constructor(props) {
     super(props);
 
     this.state = {
-      firstName: null,
-      lastName: null,
+
       email: null,
       password: null,
+      login: false,
       formErrors: {
-        firstName: "",
-        lastName: "",
+
         email: "",
-        password: ""
-      }
+        password: "",
+        username: ""
+      },
+      renderHome : false
     };
   }
 
@@ -46,15 +50,32 @@ class App extends Component {
     if (formValid(this.state)) {
       console.log(`
         --SUBMITTING--
-        First Name: ${this.state.firstName}
-        Last Name: ${this.state.lastName}
+        
         Email: ${this.state.email}
-        Password: ${this.state.password}
-      `);
+        Password: ${this.state.password}  
+       `
+      );
+      this.setState({ login: true });
+      sessionStorage.setItem("login", "true");
+      sessionStorage.setItem("email", this.state.email)
+      this.setState({
+        renderHome: true
+      });
+      
+      // let history = useHistory();
+      // history.goBack();
+      //return this.setState({ error: "" });
     } else {
       console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
     }
+
   };
+
+  routeChange=()=> {
+    let history = useHistory();
+    console.log('sdsdsdsdss');
+    history.goBack();
+  }
 
   handleChange = e => {
     e.preventDefault();
@@ -85,46 +106,23 @@ class App extends Component {
 
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   };
-  
- 
+
 
   render() {
     const { formErrors } = this.state;
 
+    const renderToHomePage = this.state.renderHome;
+    if (renderToHomePage === true) {
+      return <Redirect to="/" />
+    }
+
     return (
+
       <div className="wrapper">
-        <Link to="/"><button className="close-search">Close</button></Link>      
+        <Link to="/"><button className="close-search">Close</button></Link>
         <div className="form-wrapper">
           <h1>LOG IN</h1>
           <form onSubmit={this.handleSubmit} noValidate>
-            <div className="firstName">
-              <label htmlFor="firstName">First Name</label>
-              <input
-                className={formErrors.firstName.length > 0 ? "error" : null}
-                placeholder="First Name"
-                type="text"
-                name="firstName"
-                noValidate
-                onChange={this.handleChange}
-              />
-              {formErrors.firstName.length > 0 && (
-                <span className="errorMessage">{formErrors.firstName}</span>
-              )}
-            </div>
-            <div className="lastName">
-              <label htmlFor="lastName">Last Name</label>
-              <input
-                className={formErrors.lastName.length > 0 ? "error" : null}
-                placeholder="Last Name"
-                type="text"
-                name="lastName"
-                noValidate
-                onChange={this.handleChange}
-              />
-              {formErrors.lastName.length > 0 && (
-                <span className="errorMessage">{formErrors.lastName}</span>
-              )}
-            </div>
             <div className="email">
               <label htmlFor="email">Email</label>
               <input
@@ -153,10 +151,11 @@ class App extends Component {
                 <span className="errorMessage">{formErrors.password}</span>
               )}
             </div>
+
             <div className="createAccount">
               <button type="submit">Log In</button>
-              <small>Already Have an Account?</small>
             </div>
+
           </form>
         </div>
       </div>
