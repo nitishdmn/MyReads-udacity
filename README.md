@@ -1,6 +1,6 @@
 # MyReads Project
 
-![APP IMAGE](/images.png)
+![APP IMAGE](/image.png)
 
 ### About
 
